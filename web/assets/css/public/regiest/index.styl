@@ -1,0 +1,114 @@
+.m-regiest {
+	header {
+		border-bottom: 2px solid #2bb8aa;
+		color: #666;
+		min-width: 980px;
+
+		.wrapper {
+			margin: 0 auto;
+			padding: 10px 0;
+			width: 980px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.site-logo {
+				width: 54px;
+				height: 36px;
+				background-position: -669px -748px;
+				background-image: url('https://s0.meituan.net/bs/file/?f=fe-sso-fs:build/assets/sp-normal.2ee5c09.png');
+				text-indent: -1000px;
+				overflow: hidden;
+				color: #2bb8aa;
+			}
+
+			.login-block {
+				font-size: 14px;
+
+				.tip {
+					margin-right: 10px;
+				}
+
+				.login {
+					padding: 6px 10px;
+					background-color: #2db3a6;
+					color: #fff;
+					font-weight: 400;
+					font-size: 12px;
+					line-height: 1.5;
+					border-radius: 2px;
+					background-size: 100%;
+					background-image: linear-gradient(to bottom, #2ec3b4, #2db3a6);
+
+					&:hover {
+						background-image: linear-gradient(to bottom, #2bb8aa, #2eb7aa);
+					}
+				}
+			}
+		}
+	}
+
+	.content {
+		width: 980px;
+		min-height: 300px;
+		margin: 0 auto 30px;
+		padding-top: 30px;
+
+		>>> .el-input__inner {
+			width: 260px;
+		}
+
+		>>> .el-input__inner:focus {
+			border-color: #2bb8aa;
+		}
+
+		.regiest-btn {
+			background-color: #2eb7aa;
+			background-size: 100%;
+			background-image: linear-gradient(to bottom, #2bb8aa, #2eb7aa);
+
+			&:hover {
+				background-image: linear-gradient(to bottom, #2bb8aa, #2eb7aa) !important;
+			}
+		}
+
+		.term {
+			padding: 3px 10px 3px 120px;
+
+			a {
+				color: #2bb8aa;
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	footer {
+		border-top: 1px solid #EEE;
+		padding-top: 20px;
+		text-align: center;
+
+		.copyright {
+			font-size: 12px;
+
+			a {
+				color: #999;
+
+				&:hover {
+					color: #2bb8aa;
+				}
+			}
+
+			.f1 {
+				font-size: 13px;
+			}
+
+			span {
+				color: #999;
+			}
+		}
+	}
+}

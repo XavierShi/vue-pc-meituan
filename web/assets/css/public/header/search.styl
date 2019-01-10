@@ -1,0 +1,150 @@
+.m-search-content {
+	width: 1190px;
+	margin: 0 auto;
+
+	.header-title-module {
+		float: left;
+		padding: 28px 60px 40px 0;
+		font-size: 16px;
+		min-width: 220px;
+		height: 54px;
+		box-sizing: content-box;
+		position: relative;
+
+		img {
+			width: 126px;
+			height: 46px;
+		}
+	}
+
+	.m-search-module {
+		float: left;
+		padding-top: 28px;
+
+		.m-search-block {
+			width: 550px;
+			height: 40px;
+			border: 1px solid #13D1BE;
+			border-radius: 4px;
+			background-color: #fff;
+
+			.m-search-input {
+				border: none;
+				padding: 10px;
+				width: 84%;
+				height: 100%;
+				line-height: 100%;
+				font-size: 15px;
+				box-sizing: border-box;
+				outline: 0;
+				background: 0 0;
+				display: inline-block;
+				cursor: text;
+
+				&::-webkit-input-placeholder {
+					color: #999;
+				}
+			}
+
+			.m-search-btn {
+				outline: none;
+				height: 100%;
+				line-height: 100%;
+				background: #13D1BE;
+				border: none;
+				float: right;
+				color: #fff;
+				width: 16%;
+				box-sizing: border-box;
+				cursor: pointer;
+
+				&:active {
+					background-color: #73E1CE;
+				}
+
+				i {
+					font-size: 18px;
+					font-weight: bold;
+				}
+			}
+		}
+
+		.m-search-hotword {
+			width: 550px;
+			padding-top: 8px;
+			padding-left: 12px;
+			text-align: left;
+			height: 25px;
+			overflow: hidden;
+			box-sizing: border-box;
+
+			a {
+				color: #999;
+				margin-right: 10px;
+				margin-bottom: 3px;
+
+				&:hover {
+					color: #31BBAC;
+				}
+			}
+		}
+
+		.m-search-suggest {
+			width: 463px;
+			box-sizing: border-box;
+			border: 1px solid #e5e5e5;
+			background-color: #fff;
+			color: #999;
+			text-align: left;
+			font-size: 12px;
+			box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+			border-bottom-left-radius: 4px;
+			border-bottom-right-radius: 4px;
+			position: absolute;
+
+			.m-search-noinput {
+				padding: 10px;
+				overflow: hidden;
+
+				.m-search-history {
+					padding-bottom: 5px;
+
+					.m-search-clean {
+						position: absolute;
+						top: 10px;
+						right: 10px;
+						cursor: pointer;
+					}
+				}
+
+				.m-search-hotword {
+					padding-left: 0;
+					color: #666;
+					overflow: hidden;
+				}
+			}
+
+			.m-search-hasinput {
+				li {
+					list-style: none;
+					cursor: pointer;
+
+					&:hover {
+						background-color: #f8f8f8;
+
+						a {
+							color: #31BBAC;
+						}
+					}
+
+					a {
+						color: #333;
+						padding: 4px 10px;
+						line-height: 2;
+						font-size: 12px;
+					}
+				}
+			}
+		}
+	}
+}
