@@ -25,7 +25,14 @@
   },
   "dependencies": {
     "egg": "^2.6.1",
-    "egg-scripts": "^2.6.0"
+    "egg-cors": "^2.1.2",
+    "egg-mongoose": "^3.1.1",
+    "egg-passport": "^2.0.1",
+    "egg-passport-local": "^1.2.1",
+    "egg-redis": "^2.3.0",
+    "egg-scripts": "^2.6.0",
+    "egg-security": "^2.4.2",
+    "egg-shell-decorators": "^1.0.7"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

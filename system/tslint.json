@@ -3,9 +3,9 @@
   "rules": {
     "quotemark": [
       true,
-      "single",
       "jsx-double"
     ],
+    "no-var-requires": false,
     "no-console": [
       true,
       "dir",
@@ -37,7 +37,20 @@
       true,
       "allow-leading-underscore"
     ],
-    "align": [true, "statements"]
+    "align": [true, "statements"],
+    "trailing-comma": [true, { //对尾随逗号的校验
+      "multiline": {
+        "objects": "ignore",
+        "arrays": "ignore",
+        "functions": "ignore",
+        "typeLiterals": "ignore"
+      },
+      "esSpecCompliant": true //是否允许尾随逗号出现在剩余变量中
+    }],
+    "no-trailing-whitespace": [ // 不允许空格结尾
+      false,
+      "ignore-comments",
+      "ignore-jsdoc"
+    ],
   }
 }
-
