@@ -2,7 +2,9 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-
+  env: {
+    baseUrl: 'http://127.0.0.1:7001',
+  },
   /*
    ** Headers of the page
    */
@@ -49,7 +51,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
   ],
 
   /*
@@ -64,6 +66,7 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'http://127.0.0.1:7001'
   },
 
   /*

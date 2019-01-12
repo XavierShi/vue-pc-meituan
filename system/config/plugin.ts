@@ -19,7 +19,7 @@ const plugin: EggPlugin = {
     package: "egg-mongoose"
   },
   redis: {
-    enable: false,
+    enable: true,
     package: "egg-redis"
   },
   passport: {
@@ -29,6 +29,10 @@ const plugin: EggPlugin = {
   passportLocal: {
     enable: true,
     package: "egg-passport-local"
+  },
+  validate: {
+    enable: true,
+    package: "egg-validate"
   }
 }
 

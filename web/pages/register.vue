@@ -89,13 +89,13 @@
 </template>
 
 <script>
+let CryptoJS = require('crypto-js')
 export default {
   layout: 'blank',
   data() {
     //  手机号校验函数
     let validatorPhoneNum = (rule, value, callback) => {
       let test = /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/
-      console.log(value)
       if (test.test(value)) {
         callback()
       } else {
@@ -143,7 +143,8 @@ export default {
         password: '',
         repeatPassword: '',
         verificationCode: '',
-        oldVerificationCode: 0
+        oldVerificationCode: '',
+        md5Password: ''
       },
       rules: {
         phoneNum: [
@@ -170,10 +171,55 @@ export default {
   methods: {
     // 发送短信验证码
     sendSMS() {
-      this.form.oldVerificationCode = 1234
+      this.$refs.form.validateField('phoneNum', rs => {
+        if (rs == '') {
+          this.$axios
+            .get('/user/VerificationCode', {
+              params: {
+                phoneNum: this.form.phoneNum
+              }
+            })
+            .then(res => {
+              if (res.data.success) {
+                this.$message({
+                  message: res.data.data.msg,
+                  type: 'success'
+                })
+                this.form.oldVerificationCode = res.data.data.code
+              } else {
+                this.$message({
+                  message: res.data.data.msg,
+                  type: 'error'
+                })
+              }
+            })
+            .catch(e => {
+              this.$message({
+                message: '网络异常',
+                type: 'error'
+              })
+            })
+        }
+      })
     },
+    // 注册用户
     onSubmit() {
-      console.log('submit!')
+      this.form.md5Password = CryptoJS.MD5(this.form.password).toString()
+      this.$axios
+        .post('/user/SignUp', {
+          userName: this.form.phoneNum,
+          password: this.form.md5Password
+        })
+        .then(res => {
+          if (res.data.data.code === -1) {
+            this.$message({
+              message: res.data.data.msg,
+              type: 'error'
+            })
+          } else {
+          }
+          console.log(res.data)
+        })
     }
   }
 }

@@ -7,7 +7,7 @@ import {
   Message
 } from "egg-shell-decorators"
 
-@TagsAll("用户")
+@TagsAll("Home")
 @IgnoreJwtAll
 export default class HomeController extends Controller {
   @Get("/2")

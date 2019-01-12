@@ -13,7 +13,7 @@ export default (app: Application) => {
     quickStart: true,
     swaggerOpt: {
       open: true,
-      title: "示例",
+      title: "美团网Api接口文档",
       version: "1.0.0",
       host: "127.0.0.1",
       port: 7001,

@@ -48,6 +48,12 @@ export default (appInfo: EggAppInfo) => {
     // passwordField: 'password',
   }
 
+  // validate
+  config.validate = {
+    // convert: false,
+    // validateRoot: false,
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,

@@ -1,0 +1,26 @@
+{
+    "/SignUp": {
+        "post": {
+            "description": "用户注册",
+            "parameters": [{
+                "name": "body",
+                "in": "body",
+                "required": true,
+                "schema": {
+                    "$ref": "User"
+                }
+            }],
+            "responses": {
+                "type": "object",
+                "schema": {
+                    "$ref": "User"
+                }
+            }
+        }
+    },
+    "/VerificationCode": {
+        "get": {
+            "description": "发送验证码"
+        }
+    }
+}
