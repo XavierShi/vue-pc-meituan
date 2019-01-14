@@ -2,10 +2,10 @@
   <div class="m-regiest">
     <header>
       <div class="wrapper">
-        <a
+        <nuxt-link
           class="site-logo"
-          href="http://www.meituan.com"
-        >美团</a>
+          to="/"
+        >美团</nuxt-link>
         <div class="login-block">
           <span>已有美团账号？</span>
           <a
@@ -179,16 +179,17 @@ export default {
                 phoneNum: this.form.phoneNum
               }
             })
-            .then(res => {
-              if (res.data.success) {
+            .then(({ data } = res) => {
+              if (data.success) {
                 this.$message({
-                  message: res.data.data.msg,
+                  message: data.data.msg,
                   type: 'success'
                 })
-                this.form.oldVerificationCode = res.data.data.code
+                this.form.oldVerificationCode = data.data.code
+                this.form.verificationCode = data.data.code
               } else {
                 this.$message({
-                  message: res.data.data.msg,
+                  message: data.data.msg,
                   type: 'error'
                 })
               }
@@ -204,27 +205,40 @@ export default {
     },
     // 注册用户
     onSubmit() {
-      this.form.md5Password = CryptoJS.MD5(this.form.password).toString()
-      this.$axios
-        .post('/user/SignUp', {
-          userName: this.form.phoneNum,
-          password: this.form.md5Password
-        })
-        .then(res => {
-          if (res.data.data.code === -1) {
-            this.$message({
-              message: res.data.data.msg,
-              type: 'error'
+      this.$refs.form.validate(ok => {
+        console.log(ok)
+        if (ok) {
+          this.form.md5Password = CryptoJS.MD5(this.form.password).toString()
+          this.$axios
+            .post('/user/SignUp', {
+              phoneNum: this.form.phoneNum,
+              password: this.form.md5Password,
+              userName: '',
+              email: ''
             })
-          } else {
-          }
-          console.log(res.data)
-        })
+            .then(({ data } = res) => {
+              if (data.data.code === -1) {
+                this.$message({
+                  message: data.data.msg,
+                  type: 'error'
+                })
+              } else {
+                this.$message({
+                  message: data.data.msg,
+                  type: 'success'
+                })
+                setTimeout(() => {
+                  this.$router.replace('/')
+                }, 2000)
+              }
+            })
+        }
+      })
     }
   }
 }
 </script>
 
 <style scoped lang="stylus">
-@import '~assets/css/public/regiest/index.styl';
+@import '~assets/css/regiest/index.styl';
 </style>

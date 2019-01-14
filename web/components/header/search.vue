@@ -2,7 +2,7 @@
   <div class="m-search-content">
     <div class="header-title-module">
       <div>
-        <nuxt-link to="/meituan">
+        <nuxt-link to="/">
           <img
             src="~assets/img/logo.png"
             alt=""

@@ -9,7 +9,8 @@ import Banner from '@/components/index/banner'
 export default {
   components: {
     Banner
-  }
+  },
+  middleware: ['auth']
 }
 </script>
 

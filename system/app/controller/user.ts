@@ -17,13 +17,21 @@ export default class UserController extends Controller {
     }
   }
 
+  /**
+   * @description 用户注册
+   * @author XavierShi
+   * @returns
+   * @memberof UserController
+   */
   @Post("/SignUp")
   public async singup() {
     const { ctx, app } = this
     const rule = {
-      phoneNum: "int",
+      phoneNum: {
+        type: "int"
+      },
       email: {
-        type: "email",
+        type: "string",
         required: false,
         default: ""
       },
@@ -33,7 +41,8 @@ export default class UserController extends Controller {
         default: ""
       },
       password: {
-        type: "password"
+        type: "password",
+        allowEmpty: false
       }
     }
     const error = app.validator.validate(rule, ctx.request.body)
@@ -43,28 +52,40 @@ export default class UserController extends Controller {
         msg: error
       }
     } else {
-      let user = await ctx.model.User.find({
-        phoneNum: ctx.request.body.phoneNum
-      })
-      if (user.length) {
-        return {
-          code: -1,
-          msg: "账号已经注册!"
-        }
-      } else {
-        let nuser = await ctx.model.User.create(ctx.request.body)
-        if (!nuser) {
+      try {
+        let user = await ctx.model.User.find({
+          phoneNum: ctx.request.body.phoneNum
+        })
+        if (user.length) {
           return {
             code: -1,
-            msg: nuser
+            msg: "账号已经注册!"
           }
         } else {
-          return {
-            code: 0,
-            msg: "注册成功！"
-          }
+          try {
+            let nuser = await ctx.model.User.create(ctx.request.body)
+            if (!nuser) {
+              return {
+                code: -1,
+                msg: nuser
+              }
+            } else {
+              return {
+                code: 0,
+                msg: "注册成功！"
+              }
+            }
+          } catch (error) {}
         }
-      }
+      } catch (error) {}
     }
   }
+
+  /**
+   * @description
+   * @author XavierShi
+   * @memberof UserController
+   */
+  @Get("/SignIn")
+  public async signin() {}
 }

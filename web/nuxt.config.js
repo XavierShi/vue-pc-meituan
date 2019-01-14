@@ -9,7 +9,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: "美团网",
     meta: [{
         charset: 'utf-8'
       },

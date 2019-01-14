@@ -2,7 +2,7 @@
   <div class="m-nav">
     <ul class="list">
       <li class="list-item">
-        <nuxt-link to="/my">我的美团</nuxt-link>
+        <nuxt-link to="/">我的美团</nuxt-link>
         <ul>
           <li>
             <nuxt-link to="/my">
