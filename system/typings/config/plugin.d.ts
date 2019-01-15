@@ -8,3 +8,4 @@ import 'egg-redis';
 import 'egg-passport';
 import 'egg-passport-local';
 import 'egg-validate';
+import 'egg-jwt';

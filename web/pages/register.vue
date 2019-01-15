@@ -165,7 +165,8 @@ export default {
           { required: true, message: '请再次输入密码' },
           { validator: validatorRepeatPassword, trigger: 'blur' }
         ]
-      }
+      },
+      canRegister: true
     }
   },
   methods: {
@@ -205,35 +206,46 @@ export default {
     },
     // 注册用户
     onSubmit() {
-      this.$refs.form.validate(ok => {
-        console.log(ok)
-        if (ok) {
-          this.form.md5Password = CryptoJS.MD5(this.form.password).toString()
-          this.$axios
-            .post('/user/SignUp', {
-              phoneNum: this.form.phoneNum,
-              password: this.form.md5Password,
-              userName: '',
-              email: ''
-            })
-            .then(({ data } = res) => {
-              if (data.data.code === -1) {
+      if (this.canRegister) {
+        this.canRegister = false
+        this.$refs.form.validate(ok => {
+          console.log(ok)
+          if (ok) {
+            this.form.md5Password = CryptoJS.MD5(this.form.password).toString()
+            this.$axios
+              .post('/user/SignUp', {
+                phoneNum: this.form.phoneNum,
+                password: this.form.md5Password,
+                userName: '',
+                email: ''
+              })
+              .then(({ data } = res) => {
+                this.canRegister = true
+                if (data.data.code === -1) {
+                  this.$message({
+                    message: data.data.msg,
+                    type: 'error'
+                  })
+                } else {
+                  this.$message({
+                    message: data.data.msg,
+                    type: 'success'
+                  })
+                  setTimeout(() => {
+                    this.$router.replace('/')
+                  }, 2000)
+                }
+              })
+              .catch(e => {
+                this.canRegister = true
                 this.$message({
-                  message: data.data.msg,
+                  message: '网络异常!',
                   type: 'error'
                 })
-              } else {
-                this.$message({
-                  message: data.data.msg,
-                  type: 'success'
-                })
-                setTimeout(() => {
-                  this.$router.replace('/')
-                }, 2000)
-              }
-            })
-        }
-      })
+              })
+          }
+        })
+      }
     }
   }
 }

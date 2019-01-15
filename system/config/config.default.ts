@@ -8,7 +8,11 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + "_1547087481623_4594"
 
   // add your egg config in here
-  config.middleware = []
+  config.middleware = ["verJWT"]
+
+  config.verJWT = {
+    ignore: ["/user/SignIn", "/user/SignUp", "/user/VerificationCode"]
+  }
 
   // add your special config in here
   const bizConfig = {
@@ -19,6 +23,8 @@ export default (appInfo: EggAppInfo) => {
     csrf: false,
     domainWhiteList: ["http://127.0.0.1:7001", "http://192.168.1.101:7001"]
   }
+
+  // cors
   config.cors = {
     origin: "*",
     allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH"
@@ -52,6 +58,11 @@ export default (appInfo: EggAppInfo) => {
   config.validate = {
     // convert: false,
     // validateRoot: false,
+  }
+
+  // jwt
+  config.jwt = {
+    secret: "meituan" //自己设置的值
   }
 
   // the return config will combines to EggAppConfig

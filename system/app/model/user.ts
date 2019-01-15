@@ -4,13 +4,17 @@ export default app => {
 
   let UserSchema = new Schema({
     userName: {
-      type: String
+      type: String,
+      unique: true,
+      require: false
     },
     password: {
       type: String
     },
     email: {
-      type: String
+      type: String,
+      unique: true,
+      require: false
     },
     phoneNum: {
       type: Number,

@@ -20,5 +20,40 @@
                 "description": "密码"
             }
         }
+    },
+    "UserLogin": {
+        "type": "object",
+        "properties": {
+            "username": {
+                "type": "string",
+                "description": "昵称、邮箱、手机号"
+            },
+            "password": {
+                "type": "string",
+                "description": "密码"
+            }
+        }
+    },
+    "UserInfo": {
+        "type": "object",
+        "properties": {
+            "userName": {
+                "type": "string",
+                "description": "姓名"
+            },
+            "phoneNum": {
+                "type": "integer",
+                "format": "int32",
+                "description": "手机号码"
+            },
+            "email": {
+                "type": "string",
+                "description": "邮箱"
+            },
+            "password": {
+                "type": "string",
+                "description": "密码"
+            }
+        }
     }
 }

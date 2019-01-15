@@ -1,4 +1,9 @@
 {
+    "/VerificationCode": {
+        "get": {
+            "description": "发送验证码"
+        }
+    },
     "/SignUp": {
         "post": {
             "description": "用户注册",
@@ -18,9 +23,24 @@
             }
         }
     },
-    "/VerificationCode": {
-        "get": {
-            "description": "发送验证码"
+    "/SignIn": {
+        "post": {
+            "description": "用户登录",
+            "Authorization": "",
+            "parameters": [{
+                "name": "body",
+                "in": "body",
+                "required": true,
+                "schema": {
+                    "$ref": "UserLogin"
+                }
+            }],
+            "responses": {
+                "type": "object",
+                "schema": {
+                    "$ref": "UserInfo"
+                }
+            }
         }
     }
 }

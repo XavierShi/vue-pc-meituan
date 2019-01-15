@@ -5,8 +5,11 @@
  * @Last Modified time: 2019-01-11 17:21:20
  */
 import { Controller } from "egg"
-import { Post, Get } from "egg-shell-decorators"
+import { Post, Get, TagsAll, IgnoreJwt } from "egg-shell-decorators"
+
+@TagsAll("用户")
 export default class UserController extends Controller {
+  @IgnoreJwt
   @Get("/VerificationCode")
   public async verificationCode() {
     let code = new Date().getTime()
@@ -23,6 +26,7 @@ export default class UserController extends Controller {
    * @returns
    * @memberof UserController
    */
+  @IgnoreJwt
   @Post("/SignUp")
   public async singup() {
     const { ctx, app } = this
@@ -86,6 +90,60 @@ export default class UserController extends Controller {
    * @author XavierShi
    * @memberof UserController
    */
-  @Get("/SignIn")
-  public async signin() {}
+  @IgnoreJwt
+  @Post("/SignIn")
+  public async signin() {
+    const { ctx, app } = this
+    try {
+      let user = await ctx.model.User.find({
+        $or: [
+          { phoneNum: parseInt(ctx.request.body.username) },
+          { userName: ctx.request.body.username },
+          { email: ctx.request.body.username }
+        ]
+      })
+      if (user.length) {
+        let userInfo = {
+          _id: ""
+        }
+        if (
+          user.some(item => {
+            userInfo = item
+            return item.password == ctx.request.body.password
+          })
+        ) {
+          const token = app.jwt.sign(
+            {
+              id: userInfo._id
+            },
+            app.config.jwt.secret,
+            {
+              expiresIn: "60000"
+            }
+          )
+          return {
+            code: 0,
+            msg: "登录成功!",
+            token,
+            userInfo
+          }
+        } else {
+          return {
+            code: -1,
+            msg: "用户名或密码错误!"
+          }
+        }
+      } else {
+        return {
+          code: -1,
+          msg: "用户不存在!"
+        }
+      }
+    } catch (error) {
+      return {
+        code: -1,
+        msg: error
+      }
+    }
+  }
 }

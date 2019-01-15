@@ -10,7 +10,7 @@
       <div class="site-body cf">
         <div class="promotion-banner">
           <img
-            src="//s0.meituan.net/bs/file/?f=fe-sso-fs:build/page/static/banner/www.jpg"
+            src="https://s0.meituan.net/bs/file/?f=fe-sso-fs:build/page/static/banner/www.jpg"
             width="480"
             height="370"
             alt="美团网"
@@ -21,32 +21,36 @@
           data-params="{&quot;service&quot;:&quot;www&quot;,&quot;isDialog&quot;:false }"
         >
           <form
+            v-show="loginType==='normal'"
             id="J-normal-form"
-            action="/account/unitivelogin?risk_partner=0&amp;uuid=ca5381f384174178a546.1547427959.1.0.0&amp;service=www&amp;continue=https%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken%3Fcontinue%3Dhttp%253A%252F%252Fbj.meituan.com%252F"
-            method="POST"
             class="form form--stack"
+            @submit.prevent="login($event)"
           >
             <div
+              v-show="msg.length!=0"
               class="validate-info"
-              style="visibility:hidden"
-            ></div>
+            >
+              <i class="tip-status tip-status--opinfo"></i>
+              {{ msg }}
+            </div>
             <span
               class="login-type"
               data-mtevent="login.mobile.switch"
             >
-              <a
+              <!-- <div
                 id="J-mobile-link"
-                href="/account/unitivelogin?service=www&amp;continue=https%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken%3Fcontinue%3Dhttp%253A%252F%252Fbj.meituan.com%252F&amp;_nsmobilelogin=true"
+                @click="loginType = 'mobile'"
               >
                 手机动态码登录
                 <i></i>
-              </a>
+              </div> -->
               账号登录
             </span>
             <div class="form-field form-field--icon">
               <i class="icon icon-user"></i>
               <input
                 id="login-email"
+                v-model="form.username"
                 type="text"
                 class="f-text"
                 name="email"
@@ -58,6 +62,7 @@
               <i class="icon icon-password"></i>
               <input
                 id="login-password"
+                v-model="form.password"
                 type="password"
                 class="f-text"
                 name="password"
@@ -123,19 +128,19 @@
               >
             </div>
             <p class="signup-guide">还没有账号？
-              <a
-                href="/account/unitivesignup?service=www&amp;continue=https%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken%3Fcontinue%3Dhttp%253A%252F%252Fbj.meituan.com%252F"
+              <nuxt-link
+                to="/register"
                 target="_top"
-              >免费注册</a>
+              >免费注册</nuxt-link>
             </p>
           </form>
 
           <form
+            v-show="loginType === 'mobile'"
             id="J-mobile-form"
             action="/account/unitivemobilelogin?risk_partner=0&amp;uuid=ca5381f384174178a546.1547427959.1.0.0&amp;service=www&amp;continue=https%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken%3Fcontinue%3Dhttp%253A%252F%252Fbj.meituan.com%252F"
             method="POST"
             class="form form--stack J-wwwtracker-form"
-            style="display:none"
           >
             <div
               class="validate-info"
@@ -146,13 +151,13 @@
               class="login-type login-type--normal"
               data-mtevent="login.normal.switch"
             >
-              <a
+              <div
                 id="J-normal-link"
-                href="/account/unitivelogin?service=www&amp;continue=https%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken%3Fcontinue%3Dhttp%253A%252F%252Fbj.meituan.com%252F"
+                @click="loginType = 'normal'"
               >
                 普通方式登录
                 <i></i>
-              </a>
+              </div>
               账号登录
             </span>
 
@@ -277,7 +282,7 @@
             </p>
           </form>
 
-          <div class="oauth-wrapper">
+          <!-- <div class="oauth-wrapper">
             <h3 class="title-wrapper"><span class="title">用合作网站账号登录</span></h3>
             <div class="oauth cf">
               <a
@@ -293,7 +298,7 @@
                 target="_blank"
               ></a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -346,8 +351,50 @@
 </template>
 
 <script>
+let CryptoJS = require('crypto-js')
 export default {
-  layout: 'blank'
+  layout: 'blank',
+  data() {
+    return {
+      loginType: 'normal',
+      form: {
+        username: '',
+        password: ''
+      },
+      canLogin: true,
+      msg: ''
+    }
+  },
+  methods: {
+    login(event) {
+      if (this.canLogin) {
+        this.canLogin = false
+        this.$axios
+          .post(
+            '/user/SignIn',
+            Object.assign(this.form, {
+              password: CryptoJS.MD5(this.form.password).toString()
+            })
+          )
+          .then(({ data, code } = res) => {
+            this.canLogin = true
+            if (data.data.code === -1) {
+              this.msg = data.data.msg
+            } else {
+              this.msg = ''
+              this.$router.replace('/')
+            }
+          })
+          .catch(e => {
+            this.canLogin = true
+            this.$message({
+              message: '网络异常!',
+              type: 'error'
+            })
+          })
+      }
+    }
+  }
 }
 </script>
 
