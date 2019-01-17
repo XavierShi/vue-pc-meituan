@@ -34,7 +34,8 @@
     "egg-scripts": "^2.6.0",
     "egg-security": "^2.4.2",
     "egg-shell-decorators": "^1.0.7",
-    "egg-validate": "^2.0.2"
+    "egg-validate": "^2.0.2",
+    "jwt-simple": "^0.5.5"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

@@ -1,10 +1,13 @@
 <template>
   <div class="m-user">
-    <template v-if="user">
-      欢迎您，<span class="username">{{ username }}</span>
-      <nuxt-link to="/exit">
+    <template v-if="$store.state.user._id">
+      <span class="username">{{ $store.state.user.userName }}</span>
+      <span
+        class="logout"
+        @click.prevent.stop="SignOut"
+      >
         退出
-      </nuxt-link>
+      </span>
     </template>
     <template v-else>
       <nuxt-link
@@ -25,6 +28,11 @@ export default {
     return {
       user: '',
       username: ''
+    }
+  },
+  methods: {
+    SignOut() {
+      this.$store.commit('setUser', {})
     }
   }
 }

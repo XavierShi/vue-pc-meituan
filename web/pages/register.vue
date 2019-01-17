@@ -90,6 +90,8 @@
 
 <script>
 let CryptoJS = require('crypto-js')
+import { SignUp, SignIn, VerificationCode } from '@/api/user'
+import axios from 'axios'
 export default {
   layout: 'blank',
   data() {
@@ -174,26 +176,16 @@ export default {
     sendSMS() {
       this.$refs.form.validateField('phoneNum', rs => {
         if (rs == '') {
-          this.$axios
-            .get('/user/VerificationCode', {
-              params: {
-                phoneNum: this.form.phoneNum
-              }
-            })
-            .then(({ data } = res) => {
-              if (data.success) {
-                this.$message({
-                  message: data.data.msg,
-                  type: 'success'
-                })
-                this.form.oldVerificationCode = data.data.code
-                this.form.verificationCode = data.data.code
-              } else {
-                this.$message({
-                  message: data.data.msg,
-                  type: 'error'
-                })
-              }
+          VerificationCode({
+            phoneNum: this.form.phoneNum
+          })
+            .then(data => {
+              this.$message({
+                message: data.msg,
+                type: 'success'
+              })
+              this.form.oldVerificationCode = data.VerificationCode
+              this.form.verificationCode = data.VerificationCode
             })
             .catch(e => {
               this.$message({
@@ -209,37 +201,45 @@ export default {
       if (this.canRegister) {
         this.canRegister = false
         this.$refs.form.validate(ok => {
-          console.log(ok)
           if (ok) {
             this.form.md5Password = CryptoJS.MD5(this.form.password).toString()
-            this.$axios
-              .post('/user/SignUp', {
-                phoneNum: this.form.phoneNum,
-                password: this.form.md5Password,
-                userName: '',
-                email: ''
-              })
-              .then(({ data } = res) => {
-                this.canRegister = true
-                if (data.data.code === -1) {
-                  this.$message({
-                    message: data.data.msg,
-                    type: 'error'
+            SignUp({
+              phoneNum: this.form.phoneNum,
+              password: this.form.md5Password,
+              userName: '',
+              email: ''
+            })
+              .then(data => {
+                this.$message({
+                  message: data.msg,
+                  type: 'success'
+                })
+                setTimeout(() => {
+                  SignIn({
+                    username: this.form.phoneNum,
+                    password: this.form.md5Password
                   })
-                } else {
-                  this.$message({
-                    message: data.data.msg,
-                    type: 'success'
-                  })
-                  setTimeout(() => {
-                    this.$router.replace('/')
-                  }, 2000)
-                }
+                    .then(res => {
+                      this.canRegister = true
+                      this.$store.commit('setUser', res.userInfo)
+                      axios.defaults.headers.Authorization =
+                        'Bearer ' + res.token
+                      this.$router.replace('/')
+                    })
+                    .catch(err => {
+                      console.log(err)
+                      this.canRegister = true
+                      this.$message({
+                        message: '网络异常',
+                        type: 'error'
+                      })
+                    })
+                }, 2000)
               })
               .catch(e => {
                 this.canRegister = true
                 this.$message({
-                  message: '网络异常!',
+                  message: '网络异常',
                   type: 'error'
                 })
               })

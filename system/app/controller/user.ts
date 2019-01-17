@@ -2,7 +2,7 @@
  * @Author: XavierShi
  * @Date: 2019-01-11 09:48:11
  * @Last Modified by: XavierShi
- * @Last Modified time: 2019-01-11 17:21:20
+ * @Last Modified time: 2019-01-17 09:16:56
  */
 import { Controller } from "egg"
 import { Post, Get, TagsAll, IgnoreJwt } from "egg-shell-decorators"
@@ -14,9 +14,10 @@ export default class UserController extends Controller {
   public async verificationCode() {
     let code = new Date().getTime()
     return {
+      code: 0,
+      msg: "验证码发送成功!",
       phoneNum: this.ctx.query.phoneNum || "",
-      code,
-      msg: "验证码发送成功!"
+      VerificationCode: code
     }
   }
 
@@ -67,7 +68,11 @@ export default class UserController extends Controller {
           }
         } else {
           try {
-            let nuser = await ctx.model.User.create(ctx.request.body)
+            let user = ctx.request.body
+            if (user.userName === "") {
+              user.userName = new Date().getTime()
+            }
+            let nuser = await ctx.model.User.create(user)
             if (!nuser) {
               return {
                 code: -1,
@@ -86,7 +91,7 @@ export default class UserController extends Controller {
   }
 
   /**
-   * @description
+   * @description 用户登录接口
    * @author XavierShi
    * @memberof UserController
    */
@@ -118,8 +123,14 @@ export default class UserController extends Controller {
             },
             app.config.jwt.secret,
             {
-              expiresIn: "60000"
+              expiresIn: "365d"
             }
+          )
+          await app.redis.set(
+            userInfo._id,
+            JSON.stringify({
+              token
+            })
           )
           return {
             code: 0,

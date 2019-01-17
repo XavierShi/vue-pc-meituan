@@ -1,10 +1,10 @@
 <template>
   <div class="pg-unitive-login theme--www">
     <header class="header cf">
-      <a
+      <nuxt-link
         class="site-logo"
-        href="http://www.meituan.com"
-      >美团网</a>
+        to="/"
+      >美团网</nuxt-link>
     </header>
     <div class="site-body-wrapper">
       <div class="site-body cf">
@@ -351,6 +351,8 @@
 </template>
 
 <script>
+import { SignIn } from '@/api/user'
+import axios from 'axios'
 let CryptoJS = require('crypto-js')
 export default {
   layout: 'blank',
@@ -369,21 +371,22 @@ export default {
     login(event) {
       if (this.canLogin) {
         this.canLogin = false
-        this.$axios
-          .post(
-            '/user/SignIn',
-            Object.assign(this.form, {
-              password: CryptoJS.MD5(this.form.password).toString()
+        SignIn(
+          Object.assign(this.form, {
+            password: CryptoJS.MD5(this.form.password).toString()
+          })
+        )
+          .then(res => {
+            this.$message({
+              message: res.msg,
+              type: 'success'
             })
-          )
-          .then(({ data, code } = res) => {
-            this.canLogin = true
-            if (data.data.code === -1) {
-              this.msg = data.data.msg
-            } else {
-              this.msg = ''
+            setTimeout(() => {
+              this.canLogin = true
+              this.$store.commit('setUser', res.userInfo)
+              axios.defaults.headers.Authorization = 'Bearer ' + res.token
               this.$router.replace('/')
-            }
+            }, 2000)
           })
           .catch(e => {
             this.canLogin = true

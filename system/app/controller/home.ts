@@ -8,6 +8,13 @@ import {
 } from "egg-shell-decorators"
 // import verJWT from "../middleware/verJWT"
 
+/**
+ * @description
+ * @author XavierShi
+ * @export
+ * @class HomeController
+ * @extends {Controller}
+ */
 @TagsAll("Home")
 // @BeforeAll([verJWT])
 export default class HomeController extends Controller {
