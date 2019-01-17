@@ -2,13 +2,19 @@
  * @Author: XavierShi
  * @Date: 2019-01-11 09:48:11
  * @Last Modified by: XavierShi
- * @Last Modified time: 2019-01-17 09:16:56
+ * @Last Modified time: 2019-01-17 15:42:17
  */
 import { Controller } from "egg"
 import { Post, Get, TagsAll, IgnoreJwt } from "egg-shell-decorators"
 
 @TagsAll("用户")
 export default class UserController extends Controller {
+  /**
+   * @description 发送验证码
+   * @author XavierShi
+   * @returns
+   * @memberof UserController
+   */
   @IgnoreJwt
   @Get("/VerificationCode")
   public async verificationCode() {

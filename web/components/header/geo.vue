@@ -1,7 +1,10 @@
 <template>
   <div class="m-geo">
     <i class="el-icon-location"></i>
-    <span class="current-city">济南</span>
+    <span
+      class="current-city"
+      @click="test"
+    >济南</span>
     <nuxt-link
       class="change-city"
       to="/changeCity"
@@ -24,7 +27,15 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  methods: {
+    test() {
+      this.$axios.get('/home/2').then(res => {
+        console.log(res.data)
+      })
+    }
+  }
+}
 </script>
 <style scoped lang="stylus" >
 @import '~assets/css/public/header/geo.styl';

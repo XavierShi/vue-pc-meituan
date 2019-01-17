@@ -385,6 +385,7 @@ export default {
               this.canLogin = true
               this.$store.commit('setUser', res.userInfo)
               axios.defaults.headers.Authorization = 'Bearer ' + res.token
+              this.$storage.set('meituan_token', 'Bearer ' + res.token)
               this.$router.replace('/')
             }, 2000)
           })

@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import URL from '@/api/url'
+import {
+  getCookie
+} from '@/utils/index'
 
 Vue.use(Vuex)
 
@@ -7,7 +11,7 @@ const store = () =>
   new Vuex.Store({
     state: {
       counter: 0,
-      user: {}
+      user: ''
     },
     mutations: {
       increment(state) {
@@ -24,9 +28,13 @@ const store = () =>
         req,
         app
       }) {
-        // console.log(req, app)
-        let data = await app.$axios.get('/home/2')
-        console.log(data.data)
+        let cookie = req.headers.cookie
+        let token = getCookie(cookie, 'meituan_token')
+        console.log(req.headers.cookie)
+        console.log(token)
+        if (token === '') {
+          commit('setUser', token)
+        }
       }
     }
   })

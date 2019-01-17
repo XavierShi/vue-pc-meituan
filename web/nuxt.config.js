@@ -3,8 +3,13 @@ const pkg = require('./package')
 module.exports = {
   mode: 'universal',
   env: {
-    baseUrl: 'http://127.0.0.1:7001',
+    baseUrl: 'http://127.0.0.1:3000',
   },
+  // no work
+  // server: {
+  //   port: 7001,
+  //   host: '127.0.0.1'
+  // },
   /*
    ** Headers of the page
    */
@@ -52,7 +57,10 @@ module.exports = {
    */
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/storage',
+    {
+      src: '@/plugins/storage',
+      ssr: false
+    }
   ],
 
   /*
@@ -73,11 +81,11 @@ module.exports = {
   /*
    ** Build configuration
    */
+  vendor: ['axios'],
   build: {
     /*
      ** You can extend webpack config here
      */
-    vendor: ['axios'],
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
