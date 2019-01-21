@@ -1,3 +1,10 @@
+/*
+ * @Author: XavierShi
+ * @Date: 2019-01-18 11:53:01
+ * @Last Modified by:   XavierShi
+ * @Last Modified time: 2019-01-18 11:53:01
+ * @Description
+ */
 export default app => {
   let mongoose = app.mongoose
   let Schema = mongoose.Schema

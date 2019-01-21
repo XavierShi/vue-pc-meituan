@@ -4,7 +4,7 @@
     <span
       class="current-city"
       @click="test"
-    >济南</span>
+    >{{ $store.state.geo.position.city }}</span>
     <nuxt-link
       class="change-city"
       to="/changeCity"

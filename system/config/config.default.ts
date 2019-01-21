@@ -1,4 +1,5 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from "egg"
+import ignoreRouter from "../app/routes"
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>
@@ -11,7 +12,7 @@ export default (appInfo: EggAppInfo) => {
   config.middleware = ["verJWT"]
 
   config.verJWT = {
-    ignore: ["/user/SignIn", "/user/SignUp", "/user/VerificationCode"]
+    ignore: ignoreRouter
   }
 
   // add your special config in here

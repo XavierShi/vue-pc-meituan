@@ -2,7 +2,8 @@
  * @Author: XavierShi
  * @Date: 2019-01-11 09:48:11
  * @Last Modified by: XavierShi
- * @Last Modified time: 2019-01-17 15:42:17
+ * @Last Modified time: 2019-01-18 11:30:17
+ * @Description 用户接口模块
  */
 import { Controller } from "egg"
 import { Post, Get, TagsAll, IgnoreJwt } from "egg-shell-decorators"
@@ -162,5 +163,30 @@ export default class UserController extends Controller {
         msg: error
       }
     }
+  }
+
+  /**
+   * @description 在用户登录状态下获取用户信息
+   * @author XavierShi
+   * @memberof UserController
+   */
+  @IgnoreJwt
+  @Get("GetAuth")
+  public async getAuth() {
+    const { ctx } = this
+    try {
+      let user: any = ctx.model.User.find({})
+      if (user.length) {
+        return {
+          code: 0,
+          msg: user
+        }
+      } else {
+        return {
+          code: -1,
+          msg: "没有此用户信息！"
+        }
+      }
+    } catch (error) {}
   }
 }
