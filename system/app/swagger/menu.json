@@ -1,0 +1,7 @@
+{
+    "/GetIndexMenu": {
+        "get": {
+            "description": "获取首页菜单"
+        }
+    }
+}

@@ -170,12 +170,13 @@ export default class UserController extends Controller {
    * @author XavierShi
    * @memberof UserController
    */
-  @IgnoreJwt
-  @Get("GetAuth")
+  @Get("/GetAuth")
   public async getAuth() {
-    const { ctx } = this
+    const { ctx, app } = this
     try {
-      let user: any = ctx.model.User.find({})
+      let token = ctx.header.authorization
+      let ok: any = await app.jwt.verify(token.split(" ")[1], app.config.secret)
+      let user: any = await ctx.model.User.find({ _id: ok.id }, { password: 0 })
       if (user.length) {
         return {
           code: 0,

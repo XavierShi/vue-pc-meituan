@@ -352,6 +352,8 @@
 
 <script>
 import { SignIn } from '@/api/user'
+import request from '@/api/request'
+import url from '@/api/url'
 import axios from 'axios'
 let CryptoJS = require('crypto-js')
 export default {
@@ -371,9 +373,11 @@ export default {
     login(event) {
       if (this.canLogin) {
         this.canLogin = false
+        request.defaults.baseURL = url.localhost
         SignIn(
           Object.assign(this.form, {
-            password: CryptoJS.MD5(this.form.password).toString()
+            password: CryptoJS.MD5(this.form.password).toString(),
+            url: `/user/SignIn`
           })
         )
           .then(res => {
@@ -381,9 +385,11 @@ export default {
               message: res.msg,
               type: 'success'
             })
+            request.defaults.baseURL = url.Api
             setTimeout(() => {
               this.canLogin = true
               this.$store.commit('setUser', res.userInfo)
+              request.defaults.headers.Authorization = 'Bearer ' + res.token
               axios.defaults.headers.Authorization = 'Bearer ' + res.token
               this.$storage.set('meituan_token', 'Bearer ' + res.token)
               this.$router.replace('/')
@@ -391,10 +397,7 @@ export default {
           })
           .catch(e => {
             this.canLogin = true
-            this.$message({
-              message: '网络异常!',
-              type: 'error'
-            })
+            request.defaults.baseURL = url.Api
           })
       }
     }

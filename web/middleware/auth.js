@@ -1,5 +1,11 @@
-export default async ctx => {
-  console.log('middleware')
-  // let data = await app.$axios.post(`http://127.0.0.1:3000/api/auth`)
-  // console.log(data.data)
+import request from '../api/request'
+
+export default async ({
+  store
+}) => {
+  console.log('auth')
+  if (store.state.user.userToken != '') {
+    // request.defaults.headers.Authorization = store.state.user.userToken
+  }
+  // if(store.user.user)
 }

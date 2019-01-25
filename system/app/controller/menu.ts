@@ -20,6 +20,17 @@ export default class MenuController extends Controller {
   @Get("/GetIndexMenu")
   public async getIndexMenu() {
     const { ctx } = this
-    return ctx.model.Menu.find({})
+    try {
+      let menu = await ctx.model.Menu.find({})
+      return {
+        code: 0,
+        msg: menu[0].menu
+      }
+    } catch (error) {
+      return {
+        code: -1,
+        msg: error
+      }
+    }
   }
 }

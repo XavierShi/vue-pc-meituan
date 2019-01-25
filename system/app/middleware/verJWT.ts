@@ -31,6 +31,7 @@ export default function verJWT(
               data: {
                 code: -99,
                 user: user,
+                token,
                 msg: "只允许单点登录!"
               }
             }

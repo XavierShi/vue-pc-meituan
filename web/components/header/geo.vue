@@ -27,11 +27,12 @@
   </div>
 </template>
 <script>
+import { Test } from '@/api/user'
 export default {
   methods: {
     test() {
-      this.$axios.get('/home/2').then(res => {
-        console.log(res.data)
+      Test().then(({ data }) => {
+        console.log(data)
       })
     }
   }

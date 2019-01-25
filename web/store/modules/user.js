@@ -3,7 +3,7 @@ const state = () => ({
   userToken: ''
 })
 
-const mutation = {
+const mutations = {
   setUser(state, data) {
     state.user = data
   },
@@ -15,14 +15,12 @@ const mutation = {
 const actions = {
   setUser: ({
     commit
-  }, data) => {
-    commit('setUser', data)
-  }
+  }, data) => { commit('setUser', data) },
 }
 
 export default {
   namespaced: false,
   state,
-  mutation,
+  mutations,
   actions
 }

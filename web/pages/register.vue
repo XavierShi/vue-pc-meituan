@@ -91,7 +91,9 @@
 <script>
 let CryptoJS = require('crypto-js')
 import { SignUp, SignIn, VerificationCode } from '@/api/user'
-import axios from 'axios'
+import request from '@/api/request'
+import url from '@/api/url'
+
 export default {
   layout: 'blank',
   data() {
@@ -203,6 +205,7 @@ export default {
         this.$refs.form.validate(ok => {
           if (ok) {
             this.form.md5Password = CryptoJS.MD5(this.form.password).toString()
+            request.defaults.baseURL = url.localhost
             SignUp({
               phoneNum: this.form.phoneNum,
               password: this.form.md5Password,
@@ -220,9 +223,10 @@ export default {
                     password: this.form.md5Password
                   })
                     .then(res => {
+                      request.defaults.baseURL = url.Api
                       this.canRegister = true
                       this.$store.commit('setUser', res.userInfo)
-                      axios.defaults.headers.Authorization =
+                      request.defaults.headers.Authorization =
                         'Bearer ' + res.token
                       this.$router.replace('/')
                     })
@@ -237,6 +241,7 @@ export default {
                 }, 2000)
               })
               .catch(e => {
+                request.defaults.baseURL = url.Api
                 this.canRegister = true
                 this.$message({
                   message: '网络异常',

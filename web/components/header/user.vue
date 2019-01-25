@@ -1,7 +1,7 @@
 <template>
   <div class="m-user">
-    <template v-if="$store.state.user._id">
-      <span class="username">{{ $store.state.user.userName }}</span>
+    <template v-if="$store.state.user.user._id">
+      <span class="username">{{ $store.state.user.user.userName }}</span>
       <span
         class="logout"
         @click.prevent.stop="SignOut"

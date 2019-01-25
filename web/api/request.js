@@ -1,7 +1,9 @@
 import axios from 'axios'
+import url from '@/api/url'
+import { Message } from 'element-ui'
 
 const request = axios.create({
-  baseURL: process.env.baseUrl,
+  baseURL: url.Api,
   timeout: 5000,
   retry: 3,
   retryDelay: 10000
@@ -30,14 +32,16 @@ request.interceptors.response.use(
           // window.location.href = '/login'
           return response.data.data
         } else {
-          this.$message({
+          Message({
             message: response.data.data.msg,
             type: 'error'
           })
+          return Promise.reject(response.data.data.msg)
+          // return response.data.data
         }
       }
     } else {
-      this.$message({
+      Message({
         message: response.data.data.msg,
         type: 'error'
       })

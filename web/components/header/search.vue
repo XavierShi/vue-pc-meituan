@@ -101,26 +101,12 @@
         </div>
       </div>
       <div class="m-search-hotword">
-        <nuxt-link to="/a">
-          北京故宫博物馆
-        </nuxt-link>
-        <nuxt-link to="/a">
-          北京故宫博物馆
-        </nuxt-link>
-        <nuxt-link to="/a">
-          北京故宫博物馆
-        </nuxt-link>
-        <nuxt-link to="/a">
-          北京故宫博物馆
-        </nuxt-link>
-        <nuxt-link to="/a">
-          北京故宫博物馆
-        </nuxt-link>
-        <nuxt-link to="/a">
-          北京故宫博物馆
-        </nuxt-link>
-        <nuxt-link to="/a">
-          北京故宫博物馆
+        <nuxt-link
+          v-for="item in $store.state.poi.hotPlace.slice(0,5)"
+          :key="item.id"
+          to="/a"
+        >
+          {{ item.value }}
         </nuxt-link>
       </div>
     </div>

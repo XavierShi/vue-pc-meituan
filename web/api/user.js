@@ -1,5 +1,4 @@
 import request from './request'
-import URL from './url'
 
 const url = {
   SignIn: '/user/SignIn',
@@ -7,14 +6,7 @@ const url = {
   VerificationCode: '/user/VerificationCode'
 }
 
-export function VerificationCode(params) {
-  return request({
-    url: url.VerificationCode,
-    method: 'get',
-    params
-  })
-}
-
+// 用户登录
 export function SignIn(data) {
   return request({
     url: url.SignIn,
@@ -29,5 +21,23 @@ export function SignUp(data) {
     url: url.SignUp,
     method: 'post',
     data
+  })
+}
+
+// 发送验证码
+export function VerificationCode(params) {
+  return request({
+    url: url.VerificationCode,
+    method: 'get',
+    params
+  })
+}
+
+// test
+export function Test(params) {
+  return request({
+    url: '/home/2',
+    methods: 'get',
+    params
   })
 }

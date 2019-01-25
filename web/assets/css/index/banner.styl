@@ -1,0 +1,380 @@
+.banner-container {
+	width: 1190px;
+	margin: 0 auto;
+	position: relative;
+	display: flex;
+	z-index: 15;
+
+	.shadow {
+		transition: box-shadow 0.5s;
+
+		&:hover {
+			box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.15);
+			transition: box-shadow 0.5s;
+		}
+	}
+
+	.left-banner {
+		width: 230px;
+		height: 475px;
+		background: -webkit-linear-gradient(-90deg, rgba(2, 181, 157, 0.85) 2%, rgba(22, 146, 183, 0.85) 100%);
+		margin-top: -60px;
+		position: relative;
+		color: #fff;
+		padding: 0 0 10px 0;
+
+		h4 {
+			color: #fff;
+			font-size: 16px;
+			font-weight: 400;
+			padding-left: 15px;
+			padding-top: 15px;
+			height: 50px;
+			box-sizing: border-box;
+		}
+
+		ul {
+			padding: 10px 0 8px;
+			box-sizing: border-box;
+
+			li {
+				position: relative;
+				list-style: none;
+				height: 26px;
+				line-height: 26px;
+				padding: 2px 12px;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+
+				i {
+					font-size: 14px;
+				}
+
+				i:nth-child(1) {
+					color: rgba(255, 255, 255, 0.5);
+				}
+
+				i:nth-child(3) {
+					position: absolute;
+					right: 10px;
+					font-size: 6px;
+				}
+
+				span {
+					margin-left: 11px;
+					font-size: 13px;
+
+					a {
+						color: #fff;
+					}
+				}
+
+				&:hover {
+					background-color: rgba(255, 255, 255, 0.2);
+
+					i:nth-child(1) {
+						color: rgba(255, 255, 255, 1);
+					}
+				}
+			}
+		}
+
+		.category-nav {
+			position: absolute;
+			width: 400px;
+			height: 426px;
+			background-color: #fff;
+			color: #666;
+			top: 59px;
+			left: 230px;
+			overflow: auto;
+			z-index: 2;
+
+			.category-nav-item {
+				.item-area {
+					padding: 0 30px;
+
+					.area-title {
+						height: 22px;
+						line-height: 22px;
+						margin-top: 24px;
+						padding-bottom: 10px;
+						display: flex;
+						justify-content: space-between;
+						border-bottom: 1px solid #e5e5e5;
+
+						a:nth-child(1) {
+							color: #222;
+							font-size: 16px;
+							font-weight: 500;
+						}
+
+						a:nth-child(2) {
+							color: #999;
+							font-weight: 400;
+							font-size: 12px;
+						}
+					}
+
+					.area-content {
+						a {
+							font-size: 12px;
+							color: #999;
+							line-height: 15px;
+							margin-right: 15px;
+							margin-top: 10px;
+							display: inline-block;
+
+							&:hover {
+								color: #31BBAC;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.right-banner {
+		margin-left: 240px;
+		position: relative;
+		margin-left: 10px;
+		width: 950px;
+		height: 425px;
+
+		.banner-title {
+			position: absolute;
+			top: -55px;
+			left: 20px;
+
+			a {
+				color: #222;
+				font-weight: 700;
+				font-size: 16px;
+				margin: 0 20px;
+			}
+
+			a:nth-child(1) {
+				&:hover {
+					color: #fbc700;
+				}
+			}
+
+			a:nth-child(2) {
+				&:hover {
+					color: #ed1e24;
+				}
+			}
+
+			a:nth-child(3) {
+				&:hover {
+					color: #f04d4e;
+				}
+			}
+
+			a:nth-child(4) {
+				&:hover {
+					color: #FDC411;
+				}
+			}
+
+			a:nth-child(5) {
+				&:hover {
+					color: #31BBAC;
+				}
+			}
+
+			a:nth-child(6) {
+				&:hover {
+					color: #f04d4e;
+				}
+			}
+		}
+
+		.banner-content {
+			.banner-row {
+				display: flex;
+
+				.slide {
+					width: 550px;
+					height: 100%;
+
+					.swiper-wrapper {
+						.slide-item {
+							width: 550px;
+							height: 240px;
+						}
+					}
+
+					.swiper-pagination {
+						>>> .swiper-pagination-bullet {
+							width: 10px;
+							height: 2px;
+							background-color: rgba(255, 255, 255, 0.9);
+						}
+					}
+
+					>>> .swiper-button-prev, >>> .swiper-button-next {
+						width: 40px;
+						height: 40px;
+						background: #333;
+						color: #fff;
+						border-radius: 40px;
+						opacity: 0;
+						transition: opacity 0.5s;
+						transform: scale(0.95);
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						i {
+							font-size: 25px;
+						}
+					}
+
+					&:hover {
+						>>> .swiper-button-prev, >>> .swiper-button-next {
+							opacity: 0.8;
+						}
+					}
+				}
+
+				.login-card {
+					width: 228px;
+					height: 238px;
+					background-color: #fff;
+					border: 1px solid #e5e5e5;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+
+					.user-img {
+						margin-bottom: 4px;
+
+						img {
+							width: 47px;
+							height: 47px;
+							border: 4px solid #e5e5e5;
+							border-radius: 50%;
+						}
+					}
+
+					.user-name {
+						font-size: 16px;
+						color: #222;
+						text-align: center;
+						font-weight: 500;
+						white-space: nowrap;
+						width: 6em;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+
+					.btn-login, .btn-register {
+						width: 118px;
+						text-align: center;
+						margin: 10px auto 15px;
+						background: #fff;
+						border: 1px solid #e5e5e5;
+						border-radius: 40px;
+						font-size: 14px;
+						color: #333;
+						transition: background-color 0.5s;
+						display: block;
+						line-height: 38px;
+
+						&:hover {
+							background-color: #f6f6f6;
+							transition: background-color 0.5s;
+						}
+					}
+				}
+
+				.download-app {
+					width: 228px;
+					height: 175px;
+					background-color: #fff;
+					border: 1px solid #e5e5e5;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					flex-direction: column;
+
+					img {
+						width: 95px;
+						height: 95px;
+					}
+
+					.app-name {
+						font-size: 16px;
+						color: #222;
+						font-weight: 500;
+					}
+
+					.sl {
+						font-size: 12px;
+						font-weight: 500;
+						margin-top: 2px;
+
+						.red {
+							color: #EC5330;
+							margin-right: 5px;
+						}
+
+						.gay {
+							color: #3f3f 3;
+						}
+					}
+				}
+
+				.pic-1 {
+					width: 150px;
+					height: 100%;
+					margin: 0 10px;
+				}
+
+				.pic-2 {
+					width: 270px;
+					height: 100%;
+					margin-right: 10px;
+				}
+
+				.img-4 {
+					background-image: url('/mt-index-4.jpg');
+					background-size: contain;
+					background-repeat: no-repeat;
+				}
+
+				.img-3 {
+					background-image: url('/mt-index-3.jpg');
+					background-size: cover;
+					background-repeat: no-repeat;
+				}
+
+				.img-2 {
+					background-image: url('/mt-index-2.jpg');
+					background-size: cover;
+					background-repeat: no-repeat;
+				}
+
+				.img-1 {
+					background-image: url('/mt-index-1.png');
+					background-size: cover;
+					background-repeat: no-repeat;
+					margin-right: 0;
+				}
+			}
+
+			.banner-row:nth-child(1) {
+				height: 240px;
+			}
+
+			.banner-row:nth-child(2) {
+				margin-top: 10px;
+				height: 175px;
+			}
+		}
+	}
+}

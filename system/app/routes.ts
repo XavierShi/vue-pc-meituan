@@ -3,5 +3,9 @@ export default [
   "/user/SignUp",
   "/user/VerificationCode",
   "/geo/GetPosition",
-  "/menu/GetIndexMenu"
+  "/menu/GetIndexMenu",
+  "/poi/SearchIndexPoi",
+  "/poi/GetHotPlace",
+  "/index/GetIndexSlides",
+  "/index/GetStyles"
 ]

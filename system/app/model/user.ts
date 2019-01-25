@@ -1,9 +1,9 @@
 /*
  * @Author: XavierShi
  * @Date: 2019-01-18 11:53:01
- * @Last Modified by:   XavierShi
- * @Last Modified time: 2019-01-18 11:53:01
- * @Description
+ * @Last Modified by: XavierShi
+ * @Last Modified time: 2019-01-22 14:17:12
+ * @Description 用户信息表
  */
 export default app => {
   let mongoose = app.mongoose

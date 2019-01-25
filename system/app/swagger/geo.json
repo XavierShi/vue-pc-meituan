@@ -1,0 +1,7 @@
+{
+    "/GetPosition": {
+        "get": {
+            "description": "获取地址信息"
+        }
+    }
+}
