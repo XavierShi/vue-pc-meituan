@@ -9,11 +9,12 @@
           @mouseover="showCategoryNav(item)"
           @mouseleave="showRightMenu = false"
         >
-          <i class="home-category-iconfont hc-icon-food"></i>
+          <i
+            :class="`hc-icon-`+item.type"
+            class="home-category-iconfont "
+          ></i>
           <span>
-            <nuxt-link to="/mt">
-              {{ item.name }}
-            </nuxt-link>
+            <nuxt-link to="/mt">{{ item.name }}</nuxt-link>
           </span>
           <i class="el-icon-arrow-right"></i>
         </li>
@@ -31,9 +32,7 @@
             class="item-area"
           >
             <div class="area-title">
-              <a href="/meituan">
-                {{ area.title }}
-              </a>
+              <a href="/meituan">{{ area.title }}</a>
               <a href="/meituan">
                 更多
                 <i class="el-icon-arrow-right"></i>
@@ -79,9 +78,9 @@
                   target="_blank"
                 >
                   <img
-                    v-lazy="item.url"
+                    v-lazy="item"
                     class="slide-item"
-                    alt=""
+                    alt
                   >
                 </a>
               </div>
@@ -104,10 +103,9 @@
           </a>
           <div class="login-card">
             <div class="user-img">
-
               <img
                 src="https://s0.meituan.net/bs/fe-web-meituan/2d05c2b/img/avatar.jpg"
-                alt=""
+                alt
               >
             </div>
             <p class="user-name">Hi,你好!</p>
@@ -146,7 +144,10 @@
               alt="下载APP"
             >
             <p class="app-name">美团APP手机版</p>
-            <p class="sl"><span class="red">1元起</span><span class="gary">吃喝玩乐</span></p>
+            <p class="sl">
+              <span class="red">1元起</span>
+              <span class="gary">吃喝玩乐</span>
+            </p>
           </div>
         </div>
       </div>
@@ -186,4 +187,5 @@ export default {
 
 <style scoped lang="stylus">
 @import '~assets/css/index/banner';
+@import '~assets/css/index/font-icon.styl';
 </style>

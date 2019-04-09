@@ -1,9 +1,6 @@
 const Koa = require('koa')
 const consola = require('consola')
-const {
-  Nuxt,
-  Builder
-} = require('nuxt')
+const { Nuxt, Builder } = require('nuxt')
 const bodyParser = require('koa-bodyparser')
 
 // 路由转发

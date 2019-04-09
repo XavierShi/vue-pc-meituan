@@ -10,7 +10,7 @@
           <span>已有美团账号？</span>
           <a
             class="btn btn-small login"
-            href="/account/unitivelogin?service=www&amp;continue=http%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken"
+            href="/login"
           >登录</a>
         </div>
       </div>

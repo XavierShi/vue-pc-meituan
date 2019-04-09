@@ -2,7 +2,7 @@ import request from './request'
 
 const url = {
   SignIn: '/user/SignIn',
-  SignUp: '/user/SignUp',
+  SignUp: 'http://127.0.0.1:7001/user/SignUp',
   VerificationCode: '/user/VerificationCode'
 }
 

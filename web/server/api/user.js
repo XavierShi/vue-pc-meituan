@@ -9,9 +9,7 @@ let router = new Router({
 // 登录接口
 router.post('/SignIn', async ctx => {
   try {
-    let {
-      data
-    } = await axios.post(`${url.Api}/user/SignIn`, ctx.request.body)
+    let { data } = await axios.post(`${url.Api}/user/SignIn`, ctx.request.body)
     ctx.cookies.set('meituan_token', 'Bearer ' + data.data.token, {
       domain: '127.0.0.1',
       path: '/',

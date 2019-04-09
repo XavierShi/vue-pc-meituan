@@ -1,33 +1,14 @@
-# hackernews-async-ts
+# 美团后端系统
 
-[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
+## 启动 redis
 
-## QuickStart
+Linux：cd 到 redis 的 src 目录 `./redis-server &`(添加&后台启动) or `./redis-server & ../redis.conf`(配置文件启动)  
+Mac: `brew services start redis`(后台启动) `brew services sop redis`(停止服务)
 
-### Development
+## 启动 MongoDB
 
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
-```
+`mongod --dbpath [path]` path 是数据库地址。
 
-Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
+## 项目启动
 
-### Deploy
-
-```bash
-$ npm run tsc
-$ npm start
-```
-
-### Npm Scripts
-
-- Use `npm run lint` to check code style
-- Use `npm test` to run unit test
-- se `npm run clean` to clean compiled js at development mode once
-
-### Requirement
-
-- Node.js 8.x
-- Typescript 2.8+
+`npm run dev`

@@ -25,12 +25,12 @@ export default {
     error
   }) {
     try {
+      let slides = await GetIndexSlides()
+      store.commit('setIndexSlides', slides.msg.slide)
       let data = await GetIndexMenu()
       store.commit('setIndexMenu', data.msg)
       let hotplace = await GetHotPlace()
       store.commit('setHotPlace', hotplace.msg)
-      let slides = await GetIndexSlides()
-      store.commit('setIndexSlides', slides.msg.slide)
       let styles = await GetStyles()
       store.commit('setStyles', styles.msg)
     } catch (error) {
@@ -46,4 +46,5 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~assets/css/index/font-icon.styl';
 </style>

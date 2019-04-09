@@ -101,13 +101,13 @@
         </div>
       </div>
       <div class="m-search-hotword">
-        <nuxt-link
+        <!-- <nuxt-link
           v-for="item in $store.state.poi.hotPlace.slice(0,5)"
           :key="item.id"
           to="/a"
         >
           {{ item.value }}
-        </nuxt-link>
+        </nuxt-link> -->
       </div>
     </div>
   </div>
