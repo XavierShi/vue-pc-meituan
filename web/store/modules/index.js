@@ -1,6 +1,9 @@
 const state = () => ({
   indexSlides: '',
-  styles: ''
+  styles: '',
+  maoyans: '',
+  zhenguos: '',
+  recommends: ''
 })
 
 const mutations = {
@@ -9,6 +12,15 @@ const mutations = {
   },
   setStyles(state, data) {
     state.styles = data
+  },
+  setMaoyans(state, data) {
+    state.maoyans = data
+  },
+  setZhenGuos(state, data) {
+    state.zhenguos = data
+  },
+  setRecommends(state, data) {
+    state.recommends = data
   }
 }
 
